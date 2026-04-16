@@ -11,19 +11,19 @@ A continuación se presentan los Issues recomendados para finalizar el compresor
 **Descripción:** 
 A partir de la lista enlazada ordenada implementada en [Frecuencia_Nodos.c](file:///Users/misael30/Desktop/Project-PES/Compresor_de_texto/Code/Frecuencia_Nodos.c), se debe implementar la lógica para construir el árbol.
 **Tareas:**
-- [ ] Crear la función que extraiga los 2 nodos con menor frecuencia.
-- [ ] Crear el "nodo padre" sumando las frecuencias.
-- [ ] Reinsertar el nodo padre en la lista manteniendo el orden.
-- [ ] Repetir el proceso hasta obtener el nodo raíz.
+- [x] Crear la función que extraiga los 2 nodos con menor frecuencia.
+- [x] Crear el "nodo padre" sumando las frecuencias.
+- [x] Reinsertar el nodo padre en la lista manteniendo el orden.
+- [x] Repetir el proceso hasta obtener el nodo raíz.
 
 ### Issue #2: Generación del Diccionario de Códigos (Fase 3)
 **Descripción:** 
 Recorrer el Árbol de Huffman construido en el Issue #1 para generar los nuevos códigos binarios de cada carácter.
 **Tareas:**
-- [ ] Crear la estructura `TablaCodigos`.
-- [ ] Implementar una función que recorra el árbol (recursividad recomendada).
-- [ ] Asignar `0` para caminos a la izquierda y `1` a la derecha.
-- [ ] Almacenar el código binario generado por carácter en memoria.
+- [x] Crear la estructura `TablaCodigos`.
+- [x] Implementar una función que recorra el árbol (recursividad recomendada).
+- [x] Asignar `0` para caminos a la izquierda y `1` a la derecha.
+- [x] Almacenar el código binario generado por carácter en memoria.
 
 ---
 
