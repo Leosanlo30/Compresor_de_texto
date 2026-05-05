@@ -1,7 +1,7 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
-// Estructura unificada del Nodo (Sirve para la lista y para el árbol)
+// Estructura unificada del Nodo 
 typedef struct Nodo {
     int frecuencia;
     char caracter;
