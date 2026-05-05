@@ -2,13 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-typedef struct Nodo{
-    int frecuencia;
-    char caracter;
-    struct Nodo *siguiente;
-} Nodo;
+#include "Huffman.h"
+#include "bitwise.h"
 
 void InsertarNodo_ordenado (Nodo **cabeza, char caracter, int frecuencia);
 void Archivo_Contar(const char *archivo, int frecuencias[]);
@@ -34,11 +29,70 @@ int main(){
 
     imprimirLista(lista);
 
-    
-    Nodo *actual = lista; //decimos que el nodo actual es el principio de la lista (es decir el valor NULL)
-    Nodo *siguiente_temp = NULL; //Nos ayudara a ir de Nodo en nodo para borrar cada uno
-    Borrar_memoria(actual, siguiente_temp);
+    // Construir el árbol de Huffman 
+    Nodo *raiz = construirArbolHuffman(&lista);
 
+    
+    
+    if (raiz != NULL) {
+        printf("Frecuencia total en la raiz (Total de caracteres): %d\n\n", raiz->frecuencia);
+
+        // 2. Generar Diccionario de Códigos 
+        TablaCodigos diccionario = {0}; // Inicializar todos los sub-arreglos en '\0'
+        char codigo_temporal[256];
+        
+        generarCodigos(raiz, codigo_temporal, 0, diccionario);
+
+        //Modulo de escritura fisica binaria
+        guardar_header("archivotestbin.bin", frecuencias);
+
+        FILE *original = fopen("archivotest.txt", "r");
+        BitFile *bf = abrir_escritura_bit("archivotestbin.bin");
+
+        if (original && bf) {
+            int c;
+            while ((c = fgetc(original)) != EOF) {
+
+            // busca la etiqueta dentro del dinccionario
+            char *codigo = diccionario[(unsigned char)c];
+            
+            // manda los 0's y 1's a la escritura de bits
+            for (int i = 0; codigo[i] != '\0'; i++) {
+                escribir_bit(codigo[i] == '1', bf);
+                }
+        }
+        
+        // 3. cerrar archivo y escritura
+        fclose(original);
+        cerrar_escritura_bit(bf);
+        printf("Archivo comprimido\n");
+    }
+
+        printf("--- DICCIONARIO HUFFMAN ---\n");
+        for (int i = 0; i < 256; i++) {
+            if (diccionario[i][0] != '\0') {
+               if (isprint(i) && i != ' ') {
+                    printf("Caracter ['%c']: %s\n", (char)i, diccionario[i]);
+                } else if (i == ' ') {
+                    printf("Caracter ['ESPACIO']: %s\n", diccionario[i]);
+                } else if (i == '\n') {
+                    printf("Caracter ['\\n']: %s\n", diccionario[i]);
+                } else if (i == '\t') {
+                    printf("Caracter ['\\t']: %s\n", diccionario[i]);
+                } else {
+                    printf("Caracter [Byte %d]: %s\n", i, diccionario[i]);
+                }
+            }
+        }
+    }
+
+    
+
+
+
+    // 3. Liberar la memoria completa del árbol en lugar de la lista plana
+    liberarArbol(raiz);
+    printf("\n\n\nMemoria del árbol borrada exitosamente.\n");
 
 }
 
@@ -58,7 +112,8 @@ void InsertarNodo_ordenado (Nodo **cabeza, char caracter, int frecuencia){
         nuevo->frecuencia=frecuencia;
         nuevo->caracter = caracter;
         nuevo->siguiente = NULL;
-
+        nuevo->izq=NULL;
+        nuevo->der=NULL;
 
     // creamos nuestros auxiliares Actual y Anterior
 
