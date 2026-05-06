@@ -6,5 +6,4 @@ Code/build/
 *.o
 
 # Archivos binarios y de salida generados
-*.bin
 *_recuperado.txt
