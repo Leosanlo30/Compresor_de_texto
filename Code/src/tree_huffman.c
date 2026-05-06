@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Huffman.h"
+#include "../include/Huffman.h"
 
 
-Nodo* crearNodoArbol(char caracter, int frecuencia, Nodo* izq, Nodo* der); //Rserva la memoria (malloc)
+Nodo* crearNodoArbol(char caracter, int frecuencia, Nodo* izq, Nodo* der);
 Nodo* extraerMinimo(Nodo **cabeza);
 Nodo* unirNodos(Nodo *izq, Nodo *der);
 void insertarNodoLista(Nodo **cabeza, Nodo *nuevo);
@@ -108,7 +108,7 @@ void generarCodigos(Nodo *raiz, char *codigo_actual, int profundidad, TablaCodig
 void liberarArbol(Nodo *raiz) {
     if (raiz == NULL) return;
     
-    // Liberar en Post-Orden
+    // Liberar en Post-Orden: Primero recorremos a los hijos, luego liberamos al padre
     liberarArbol(raiz->izq);
     liberarArbol(raiz->der);
     

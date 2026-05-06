@@ -2,17 +2,6 @@
 #include <stdlib.h>
 #include "bitwise.h"
 
-// Función para abrir el flujo que tenemos hecho 
-BitFile* abrir_escritura_bit(const char *nombre) {
-    BitFile *bf = (BitFile *)malloc(sizeof(BitFile));
-    if (!bf) return NULL;
-    bf->archivo = fopen(nombre, "r+b"); 
-    bf->buffer = 0;
-    bf->contador = 0;
-    // Saltamos el header: 1024 (frecuencias) + 4 (espacio para padding)
-    fseek(bf->archivo, (256 * sizeof(int)) + sizeof(int), SEEK_SET);
-    return bf;
-}
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -43,7 +32,7 @@ int main(int argc, char *argv[]) {
     BitFile *bf = abrir_escritura_bit("resultado.huff");
     if (!bf) return 1;
 
-    S
+    
     // Aquí simulamos que escribimos bits 
     while ((c = fgetc(entrada)) != EOF) {
         escribir_bit(1, bf); // Simulación: escribimos un '1' por cada carácter
@@ -55,5 +44,4 @@ int main(int argc, char *argv[]) {
     fclose(entrada);
     
     printf("¡Exito! Se genero .huff basado en '%s'.\n", argv[1]);
-    return 0;
 }

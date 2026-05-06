@@ -1,7 +1,7 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
-// Estructura unificada del Nodo 
+// Estructura unificada del Nodo (Sirve para la lista y para el árbol)
 typedef struct Nodo {
     int frecuencia;
     char caracter;
@@ -15,8 +15,14 @@ typedef struct Nodo {
 typedef char TablaCodigos[256][256];
 
 // Declaraciones de funciones compartidas
+
 Nodo* construirArbolHuffman(Nodo **cabeza);
 void generarCodigos(Nodo *raiz, char *codigo_actual, int profundidad, TablaCodigos diccionario);
 void liberarArbol(Nodo *raiz);
+
+// Funciones core de la aplicacion
+void InsertarNodo_ordenado(Nodo **cabeza, char caracter, int frecuencia);
+void comprimir_archivo(const char *archivo_entrada);
+void descomprimir_archivo(const char *archivo_entrada, const char *archivo_salida);
 
 #endif // HUFFMAN_H

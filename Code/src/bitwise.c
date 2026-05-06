@@ -1,7 +1,17 @@
-#include "bitwise.h"
+#include "../include/bitwise.h"
 #include <stdlib.h>
 
-
+// Función para abrir el flujo 
+BitFile* abrir_escritura_bit(const char *nombre) {
+    BitFile *bf = (BitFile *)malloc(sizeof(BitFile));
+    if (!bf) return NULL;
+    bf->archivo = fopen(nombre, "r+b"); 
+    bf->buffer = 0;
+    bf->contador = 0;
+    // Saltamos el header: 1024 (frecuencias) + 4 (espacio para padding)
+    fseek(bf->archivo, (256 * sizeof(int)) + sizeof(int), SEEK_SET);
+    return bf;
+}
 
 /**
   El Header garantiza la persistencia.
@@ -69,8 +79,7 @@ void cerrar_escritura_bit(BitFile *bf) {
 }
 
 /**
-  leer_bit es el proceso inverso. 
-  Extraemos el bit más significativo (MSB) usando desplazamientos a la derecha.
+  Extraemos el bit usando desplazamientos a la derecha.
  */
 int leer_bit(BitFile *bf) {
     if (!bf || !bf->archivo) return -1;
@@ -84,7 +93,7 @@ int leer_bit(BitFile *bf) {
     }
 
     bf->contador--;
-    // Usamos bitwise shift (>>) y una máscara (& 1) para aislar el bit que queremos.
+    // Usamos bitwise shift (>>) y una máscara (& 1) para aislar el bit que queremos
     int bit = (bf->buffer >> bf->contador) & 1;
     
     return bit;
@@ -95,4 +104,41 @@ void cerrar_lectura_bit(BitFile *bf) {
         if (bf->archivo) fclose(bf->archivo);
         free(bf);
     }
+
+    
+}
+
+
+// Lee las frecuencias que guardamos al principio
+int leer_header(const char *nombre, int frecuencias[256]) {
+    FILE *f = fopen(nombre, "rb");
+    if (!f) return -1;
+    
+    fread(frecuencias, sizeof(int), 256, f);
+    
+    int padding = 0;
+    fread(&padding, sizeof(int), 1, f);
+    fclose(f);
+    
+    return padding;
+}
+
+// Abre el flujo de bits sin el header
+BitFile* abrir_lectura_bit(const char *nombre) {
+    BitFile *bf = (BitFile*)malloc(sizeof(BitFile));
+    if (!bf) return NULL;
+    
+    bf->archivo = fopen(nombre, "rb");
+    if (!bf->archivo) {
+        free(bf);
+        return NULL;
+    }
+    
+    bf->buffer = 0;
+    bf->contador = 0; //leer bit llenara el contador
+    
+    // Nos saltamos los 1024 bytes de frecuencias + 4 bytes del padding
+    fseek(bf->archivo, (256 * sizeof(int)) + sizeof(int), SEEK_SET);
+    
+    return bf;
 }
