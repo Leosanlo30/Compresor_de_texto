@@ -1,4 +1,4 @@
-# 🗜️ Compresor de Archivos de Texto (.txt) - Algoritmo de Huffman
+# Compresor de Archivos de Texto (.txt) - Algoritmo de Huffman
 
 **Materia:** Programación Estructurada  
 **Lenguaje:** C  
@@ -7,7 +7,7 @@ Este documento define la base teórica y técnica de nuestro proyecto de compres
 
 ---
 
-## 📌 1. El Problema y la Solución
+## El Problema y la Solución
 En un archivo `.txt` estándar, cada carácter (letra, espacio, símbolo) ocupa **1 byte (8 bits)** de memoria, sin importar si aparece una vez o mil veces. 
 
 La solución que implementaremos con Huffman consiste en:
@@ -16,7 +16,7 @@ La solución que implementaremos con Huffman consiste en:
 
 ---
 
-## 📊 2. Fase 1: Tabla de Frecuencias
+## Tabla de Frecuencias
 El programa debe leer el archivo `.txt` original y contar las ocurrencias de cada carácter.
 
 **Ejemplo de prueba con la cadena: `Palabra`**
@@ -33,7 +33,7 @@ El programa debe leer el archivo `.txt` original y contar las ocurrencias de cad
 
 ---
 
-## 🌳 3. Fase 2: Construcción del Árbol de Huffman
+## Construcción del Árbol de Huffman
 El algoritmo toma iterativamente los dos nodos con la frecuencia más baja y los une para crear un "nodo padre". El peso de este nuevo nodo es la suma de las frecuencias de sus hijos. Este proceso se repite hasta obtener un único árbol raíz.
 
 **Regla de oro:** Los caracteres originales siempre terminan siendo las "hojas" (los nodos sin hijos) del árbol.
@@ -63,7 +63,7 @@ graph TD
 
 ```
 
-## 📖 4. Fase 3: Diccionario de Compresión (Traductor)
+## Diccionario de Compresión (Traductor)
 Al recorrer el árbol desde la raíz hasta cada carácter (hoja), generamos un nuevo diccionario binario.
 
 | Carácter | Recorrido en el Árbol | Nuevo Código Binario |
@@ -83,7 +83,7 @@ El texto original `Palabra` pasaría de ocupar 56 bits (7 caracteres x 8 bits) a
 
 ---
 
-## 🛠️ 5. Estructuras de Datos Propuestas en C
+## Estructuras de Datos Propuestas en C
 Para implementar esta lógica, definiremos los siguientes `structs` como base de nuestro programa:
 
 ```c
@@ -106,12 +106,11 @@ typedef struct {
 
 ---
 
-## 📂 6. Estructura del Proyecto
+## Estructura del Proyecto
 
 El código está organizado en diferentes módulos dentro de la carpeta `Code` y `Process`:
 
 * **`Code/src/`** (Código Fuente)
-  * [`app.c`](Code/src/app.c): Menú interactivo principal y punto de entrada al sistema.
   * [`compresor.c`](Code/src/compresor.c): Módulo encargado de la lectura original y creación del archivo binario.
   * [`descompresor.c`](Code/src/descompresor.c): Módulo que restaura el archivo original desde los bits comprimidos.
   * [`tree_huffman.c`](Code/src/tree_huffman.c): Lógica de construcción del árbol y diccionario de Huffman.
@@ -126,7 +125,7 @@ El código está organizado en diferentes módulos dentro de la carpeta `Code` y
 
 ---
 
-## ⚙️ 7. Cómo Compilar y Ejecutar
+## Cómo Compilar y Ejecutar
 
 Para compilar todo el proyecto y generar un ejecutable limpio dentro de la carpeta `build`, sigue estos pasos:
 

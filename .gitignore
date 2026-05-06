@@ -1,9 +1,0 @@
-# Archivos del sistema macOS
-.DS_Store
-
-# Archivos compilados
-Code/build/
-*.o
-
-# Archivos binarios y de salida generados
-*_recuperado.txt
