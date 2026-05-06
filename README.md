@@ -136,7 +136,7 @@ Para compilar todo el proyecto y generar un ejecutable limpio dentro de la carpe
    ```
 3. Ejecuta el siguiente comando para compilar todos los archivos fuente en `build/`:
    ```bash
-   gcc src/app.c src/compresor.c src/descompresor.c src/tree_huffman.c src/bitwise.c -o build/compresor_app
+   make
    ```
 4. Finalmente, para correr el programa:
    ```bash
