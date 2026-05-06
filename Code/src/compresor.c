@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Huffman.h"
-#include "bitwise.h"
+#include "../include/Huffman.h"
+#include "../include/bitwise.h"
 
 void InsertarNodo_ordenado (Nodo **cabeza, char caracter, int frecuencia);
 void Archivo_Contar(const char *archivo, int frecuencias[]);
@@ -13,12 +13,12 @@ void Borrar_memoria(Nodo *actual, Nodo *siguiente_temp);
 void imprimirLista(Nodo *cabeza);
 void Imprimir_arreglo_temp(int frecuencias[]);
 
-int main(){
+void comprimir_archivo(const char *archivo_entrada){
     int frecuencias[256]={0};
 
     Nodo *lista = NULL; // se crea la lista de tipo Nodo en donde se agregaran los Nodos (Inicia en valor NULL porque no hay nada)
 
-    Archivo_Contar("archivotest.txt", frecuencias); // añadir frecuencias de arreglo
+    Archivo_Contar(archivo_entrada, frecuencias); // añadir frecuencias de arreglo
 
         //agregamos la informacion a los nodos
     for (int i = 0; i < 256; i++) {
@@ -44,10 +44,13 @@ int main(){
         generarCodigos(raiz, codigo_temporal, 0, diccionario);
 
         //Modulo de escritura fisica binaria
-        guardar_header("archivotestbin.bin", frecuencias);
+        char archivo_salida[256];
+        snprintf(archivo_salida, sizeof(archivo_salida), "%s.bin", archivo_entrada);
+        
+        guardar_header(archivo_salida, frecuencias);
 
-        FILE *original = fopen("archivotest.txt", "r");
-        BitFile *bf = abrir_escritura_bit("archivotestbin.bin");
+        FILE *original = fopen(archivo_entrada, "r");
+        BitFile *bf = abrir_escritura_bit(archivo_salida);
 
         if (original && bf) {
             int c;

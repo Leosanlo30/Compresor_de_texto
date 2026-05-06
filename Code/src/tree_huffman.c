@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Huffman.h"
+#include "../include/Huffman.h"
 
 
 Nodo* crearNodoArbol(char caracter, int frecuencia, Nodo* izq, Nodo* der);

@@ -1,4 +1,4 @@
-#include "bitwise.h"
+#include "../include/bitwise.h"
 #include <stdlib.h>
 
 // Función para abrir el flujo 

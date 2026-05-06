@@ -20,4 +20,9 @@ Nodo* construirArbolHuffman(Nodo **cabeza);
 void generarCodigos(Nodo *raiz, char *codigo_actual, int profundidad, TablaCodigos diccionario);
 void liberarArbol(Nodo *raiz);
 
+// Funciones core de la aplicacion
+void InsertarNodo_ordenado(Nodo **cabeza, char caracter, int frecuencia);
+void comprimir_archivo(const char *archivo_entrada);
+void descomprimir_archivo(const char *archivo_entrada, const char *archivo_salida);
+
 #endif // HUFFMAN_H
