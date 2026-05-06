@@ -30,7 +30,8 @@ def main():
                     [executable, "-c", file_path], 
                     check=True, 
                     capture_output=True, 
-                    text=True
+                    text=True,
+                    errors='replace'
                 )
                 print(result.stdout)
                 print(f"[Python] ✅ Éxito: Se ha generado el archivo binario para {file_path}")
