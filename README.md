@@ -102,3 +102,44 @@ typedef struct {
     char caracter;
     char *codigo_binario;        // Cadena temporal para almacenar "0101..."
 } TablaCodigos;
+```
+
+---
+
+## 📂 6. Estructura del Proyecto
+
+El código está organizado en diferentes módulos dentro de la carpeta `Code` y `Process`:
+
+* **`Code/src/`** (Código Fuente)
+  * [`app.c`](Code/src/app.c): Menú interactivo principal y punto de entrada al sistema.
+  * [`compresor.c`](Code/src/compresor.c): Módulo encargado de la lectura original y creación del archivo binario.
+  * [`descompresor.c`](Code/src/descompresor.c): Módulo que restaura el archivo original desde los bits comprimidos.
+  * [`tree_huffman.c`](Code/src/tree_huffman.c): Lógica de construcción del árbol y diccionario de Huffman.
+  * [`bitwise.c`](Code/src/bitwise.c): Utilidades a bajo nivel para escribir y leer bits a partir de 1 byte.
+* **`Code/include/`** (Cabeceras)
+  * [`Huffman.h`](Code/include/Huffman.h): Definiciones y estructuras principales.
+  * [`bitwise.h`](Code/include/bitwise.h): Firmas de funciones para la manipulación de bytes.
+* **`Code/data/`**
+  * Contiene los archivos de prueba usados durante el desarrollo (`.txt` y `.bin`).
+* **`Process/`** (Documentación)
+  * [`github_issues.md`](Process/github_issues.md): Distribución original de tareas del equipo.
+
+---
+
+## ⚙️ 7. Cómo Compilar y Ejecutar
+
+Para compilar todo el proyecto y generar un ejecutable limpio dentro de la carpeta `build`, sigue estos pasos:
+
+1. Abre la terminal y navega hasta la carpeta raíz del repositorio.
+2. Entra al directorio `Code`:
+   ```bash
+   cd Code
+   ```
+3. Ejecuta el siguiente comando para compilar todos los archivos fuente en `build/`:
+   ```bash
+   gcc src/app.c src/compresor.c src/descompresor.c src/tree_huffman.c src/bitwise.c -o build/compresor_app
+   ```
+4. Finalmente, para correr el programa:
+   ```bash
+   ./build/compresor_app
+   ```
