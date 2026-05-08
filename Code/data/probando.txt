@@ -1,5 +1,0 @@
-Hola Mundo quiero ver si esta funcionando 
-correctamente el compresor que se tiene
-en la plataforma de github
-de manera continua en el archivo test.txt que esta en code\data\ 
-este texto debe ser remplazado con el texto que se encuentra en Code/data/test.txt
