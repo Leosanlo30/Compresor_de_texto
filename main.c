@@ -4,7 +4,6 @@
 #include <ctype.h>
 
 
-// Estructura unificada del Nodo 
 
 typedef struct Nodo {
     int frecuencia;
@@ -14,11 +13,9 @@ typedef struct Nodo {
     struct Nodo *der;       
 } Nodo;
 
-// Definición de la Tabla de Códigos (diccionario bidimensional)
-// [256] posiciones para los caracteres ASCII, [256] char max longitud
+
 typedef char TablaCodigos[256][256];
 
-// Estructura para el manejo de bits en archivos
 typedef struct {
     FILE *archivo;        
     unsigned char buffer; 
@@ -37,6 +34,7 @@ void generarCodigos(Nodo *raiz, char *codigo_actual, int profundidad, TablaCodig
 void liberarArbol(Nodo *raiz);
 
 // Funciones de manejo de Bits (Bitwise)
+
 void guardar_header(const char *nombre, int frecuencias[256]);
 BitFile* abrir_escritura_bit(const char *nombre);
 void escribir_bit(int bit, BitFile *bf);
@@ -48,6 +46,7 @@ void cerrar_lectura_bit(BitFile *bf);
 int leer_header(const char *nombre, int frecuencias[256]);
 
 // Funciones de compresion y descompresion
+
 void InsertarNodo_ordenado(Nodo **cabeza, char caracter, int frecuencia);
 void Archivo_Contar(const char *archivo, int frecuencias[]);
 void Borrar_memoria(Nodo *actual, Nodo *siguiente_temp);
@@ -59,6 +58,7 @@ void descomprimir_archivo(const char *archivo_entrada, const char *archivo_salid
 
 
 // Crea un nodo genérico preparado para el árbol y la lista
+
 Nodo* crearNodoArbol(char caracter, int frecuencia, Nodo* izq, Nodo* der) {
     Nodo *nuevo = (Nodo*)malloc(sizeof(Nodo));
     if (nuevo == NULL) {
