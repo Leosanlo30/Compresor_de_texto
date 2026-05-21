@@ -4,7 +4,6 @@
 #include <ctype.h>
 
 
-
 typedef struct Nodo {
     int frecuencia;
     char caracter;
@@ -598,9 +597,6 @@ void descomprimir_archivo(const char *archivo_entrada, const char *archivo_salid
 
 
 int main(int argc, char *argv[]) {
-    printf("=======================================\n");
-    printf("       Compresor de Texto Huffman      \n");
-    printf("=======================================\n\n");
 
     if (argc >= 4 && strcmp(argv[1], "-d") == 0) {
         printf("-> Modo Descompresion por Terminal\n");
