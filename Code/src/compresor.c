@@ -166,7 +166,7 @@ void Borrar_memoria(Nodo *actual, Nodo *siguiente_temp){
     }
     printf("\n\n\nMemoria borrada");
 }
-
+  
 void Archivo_Contar(const char *name_archivo, int frecuencias[]){
 
     FILE *archivo =fopen(name_archivo, "r");
