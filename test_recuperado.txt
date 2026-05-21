@@ -1,0 +1,2 @@
+Este es un archivo de prueba para verificar que el compresor de texto de la universidad funciona correctamente en un solo archivo main.c. Probando: a e i o u, 1 2 3 4 5.
+La estructura de este archivo nos ayuda a validar que no se pierde informacion despues de reconstruir todo.
