@@ -8,6 +8,7 @@ echo "   Compilando "
 gcc main.c -o compresor_app
 
 # Verificar si la compilación fue exitosa
+
 if [ $? -eq 0 ]; then
     echo " Compilación correcta "
     echo ""
