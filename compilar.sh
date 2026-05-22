@@ -5,7 +5,7 @@ echo "   Compilando "
 
 # Comando de compilación
 
-gcc main.c -o compresor_app
+gcc Code/main.c Code/Librerias/bitwise.c Code/Librerias/huffman.c -o compresor_app
 
 # Verificar si la compilación fue exitosa
 
